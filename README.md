@@ -1,0 +1,2 @@
+# janken_game
+ReactとTypescriptとで構築されたじゃんけんゲーム
