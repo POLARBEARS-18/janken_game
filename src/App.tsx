@@ -1,35 +1,27 @@
-import React from 'react'
-import { Counter } from './features/counter/Counter'
-import './App.css'
+import React, { FC } from 'react'
+import { css } from '@emotion/react'
+import { ChooseAndPlay, ScoreAndResults } from 'sections'
 
-const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src="/vite.svg" className="logo" alt="Vite logo" />
-      <Counter />
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <span>
-        <span>Learn </span>
-        <a className="App-link" href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
-          React
-        </a>
-        <span>, </span>
-        <a className="App-link" href="https://redux.js.org/" target="_blank" rel="noopener noreferrer">
-          Redux
-        </a>
-        <span>, </span>
-        <a className="App-link" href="https://redux-toolkit.js.org/" target="_blank" rel="noopener noreferrer">
-          Redux Toolkit
-        </a>
-        ,<span> and </span>
-        <a className="App-link" href="https://react-redux.js.org/" target="_blank" rel="noopener noreferrer">
-          React Redux
-        </a>
-      </span>
-    </header>
+const App: FC = () => (
+  <div css={SContainer}>
+    <div css={STitleCtn}>
+      <h1>じゃんけんゲーム</h1>
+      <p>React Typescript Game</p>
+    </div>
+    <ScoreAndResults />
+    <ChooseAndPlay />
   </div>
 )
 
 export default App
+
+const SContainer = css`
+  width: 50em;
+`
+
+const STitleCtn = css`
+  background-color: #fff;
+  border-radius: 0.3125rem;
+  padding: 1.25rem 0;
+  margin-bottom: 3.125rem;
+`
