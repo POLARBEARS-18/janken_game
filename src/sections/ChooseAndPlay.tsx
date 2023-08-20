@@ -1,20 +1,24 @@
 import { css } from '@emotion/react'
 import { HandleSelection } from 'components'
+import { useOptions } from 'context/optionsContext'
 import { FC } from 'react'
-import { FaRegHandPaper, FaRegHandRock, FaRegHandScissors } from 'react-icons/fa'
 
-const ChooseAndPlay: FC = () => (
-  <>
-    <div css={SChoiceBtnCtn}>
-      <HandleSelection name="rock" icon={<FaRegHandRock size={60} />} />
-      <HandleSelection name="paper" icon={<FaRegHandPaper size={60} />} />
-      <HandleSelection name="scissors" icon={<FaRegHandScissors size={60} />} />
-    </div>
-    <button type="button" css={SPlayBtn}>
-      Play
-    </button>
-  </>
-)
+const ChooseAndPlay: FC = () => {
+  const optionsContext = useOptions()
+
+  const HandOptionsArray = optionsContext.options.map((hand, i) => (
+    <HandleSelection key={hand.name} name={hand.name} icon={hand.icon} handChoiceIndex={i} />
+  ))
+
+  return (
+    <>
+      <div css={SChoiceBtnCtn}>{HandOptionsArray}</div>
+      <button type="button" css={SPlayBtn}>
+        Play
+      </button>
+    </>
+  )
+}
 
 export default ChooseAndPlay
 
