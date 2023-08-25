@@ -13,10 +13,8 @@ const options: IOptions[] = [
 const OptionsContext = createContext<IOptionsContext>({
   options: [],
   state: initialState,
-  dispatch: () => {
-    // 仮で追加
-    const a = ''
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  dispatch: () => {},
 })
 
 export function OptionsProvider(props: IProps) {

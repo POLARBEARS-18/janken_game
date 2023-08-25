@@ -37,7 +37,8 @@ const HandleSelection: FC<Props> = ({ name, icon, handChoiceIndex }) => {
 
 export default HandleSelection
 
-const SChoiceBtn = css`
+export const SChoiceBtn = css`
+  label: choiceBtn;
   color: #1a1a1a;
   background-color: #fff;
   display: flex;
@@ -46,6 +47,7 @@ const SChoiceBtn = css`
   border: none;
 `
 
-const SActiveChoice = css`
+export const SActiveChoice = css`
+  label: activeChoice;
   background-color: orange;
 `
