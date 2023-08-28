@@ -1,24 +1,61 @@
 import { css } from '@emotion/react'
+import { useOptions } from 'context/optionsContext'
+import { useEffect, useState } from 'react'
+import { OptionActionOnKind } from 'reducers/scoreReducerTypes'
 
-const ScoreAndResults = () => (
-  <>
-    <div css={SScoreCtn}>
-      <div css={SScore}>
-        <h3>Score</h3>
-        <p>Player</p>
+const ScoreAndResults = () => {
+  const [timer, setTimer] = useState<number>(3)
+
+  const optionContext = useOptions()
+  const { runTimer } = optionContext.state
+  const { dispatch } = optionContext
+
+  useEffect(() => {
+    if (runTimer) {
+      const newInterValid = setInterval(() => {
+        setTimer((prevCount) => {
+          if (prevCount === 1) {
+            clearInterval(newInterValid)
+          }
+          return prevCount - 1
+        })
+      }, 1000)
+    }
+  }, [runTimer])
+
+  useEffect(() => {
+    if (timer === 0) {
+      setTimer(3)
+      dispatch({ type: OptionActionOnKind.timer.RUN_TIMER, payload: false })
+    }
+  }, [timer, dispatch])
+
+  return (
+    <>
+      <div css={SScoreCtn}>
+        <div css={SScore}>
+          <h3>Score</h3>
+          <p>Player</p>
+        </div>
+        <div css={SScore}>
+          <h3>Score</h3>
+          <p>Computer</p>
+        </div>
       </div>
-      <div css={SScore}>
-        <h3>Score</h3>
-        <p>Computer</p>
+      <div css={SResults}>
+        <div css={SPlayerHand} />
+        <div css={SMidCol}>
+          {runTimer && (
+            <p css={STimer} data-testid="timer">
+              {timer}
+            </p>
+          )}
+        </div>
+        <div css={SComputerHand} />
       </div>
-    </div>
-    <div css={SResults}>
-      <div css={SPlayerHand} />
-      <div css={SMidCol} />
-      <div css={SComputerHand} />
-    </div>
-  </>
-)
+    </>
+  )
+}
 
 export default ScoreAndResults
 
@@ -70,4 +107,9 @@ const SComputerHand = css`
   height: 12.5rem;
   border-radius: 0.3125rem;
   position: relative;
+`
+
+const STimer = css`
+  color: #fff;
+  font-size: 12.5rem;
 `

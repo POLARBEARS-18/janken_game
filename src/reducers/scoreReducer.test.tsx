@@ -35,14 +35,21 @@ const TestingComponent: FC<IProps> = ({ myAction }) => {
   return (
     <>
       <p>playerHand: {state.playerHand}</p>
+      <p>computerHand: {state.computerHand}</p>
     </>
   )
 }
 
 describe('scoreReducer', () => {
   it('should update the scoreReducer with the correct playerHand', () => {
-    render(<TestingComponent myAction={{ type: OptionActionOnKind.UPDATE_PLAYER_CHOICE, payload: 0 }} />)
+    render(<TestingComponent myAction={{ type: OptionActionOnKind.update.UPDATE_PLAYER_CHOICE, payload: 0 }} />)
 
     expect(screen.getByText(/playerHand: 0/)).toBeInTheDocument()
+  })
+
+  it('should update the scoreReducer with the correct computerHand', () => {
+    render(<TestingComponent myAction={{ type: OptionActionOnKind.update.UPDATE_COMPUTER_CHOICE, payload: 1 }} />)
+
+    expect(screen.getByText(/computerHand: 1/)).toBeInTheDocument()
   })
 })

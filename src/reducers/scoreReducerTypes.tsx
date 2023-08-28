@@ -1,10 +1,21 @@
 export const OptionActionOnKind = {
-  UPDATE_PLAYER_CHOICE: 'UPDATE_PLAYER_CHOICE',
+  update: {
+    UPDATE_PLAYER_CHOICE: 'UPDATE_PLAYER_CHOICE',
+    UPDATE_COMPUTER_CHOICE: 'UPDATE_COMPUTER_CHOICE',
+  },
+  timer: {
+    RUN_TIMER: 'RUN_TIMER',
+  },
 } as const
 
-interface UpdatePlayerChoice {
-  type: (typeof OptionActionOnKind)[keyof typeof OptionActionOnKind]
+interface UpdateUpdateChoice {
+  type: (typeof OptionActionOnKind.update)[keyof typeof OptionActionOnKind.update]
   payload: number
 }
 
-export type ActionTypes = UpdatePlayerChoice
+interface RunTimer {
+  type: (typeof OptionActionOnKind.timer)[keyof typeof OptionActionOnKind.timer]
+  payload: boolean
+}
+
+export type ActionTypes = UpdateUpdateChoice | RunTimer

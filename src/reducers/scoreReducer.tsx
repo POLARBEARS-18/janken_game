@@ -10,6 +10,16 @@ export default function scoreReducer(state: IInitialState, action: ActionTypes) 
         ...state,
         playerHand: payload,
       }
+    case 'UPDATE_COMPUTER_CHOICE':
+      return {
+        ...state,
+        computerHand: payload,
+      }
+    case 'RUN_TIMER':
+      return {
+        ...state,
+        runTimer: payload,
+      }
     default:
       return {
         ...state,
