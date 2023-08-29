@@ -16,8 +16,8 @@ const ChooseAndPlay: FC = () => {
   const play = () => {
     const randNumber = generateComputerHand()
 
-    dispatch({ type: OptionActionOnKind.update.UPDATE_COMPUTER_CHOICE, payload: randNumber })
-    dispatch({ type: OptionActionOnKind.timer.RUN_TIMER, payload: true })
+    dispatch({ type: OptionActionOnKind.UPDATE_COMPUTER_CHOICE, payload: randNumber })
+    dispatch({ type: OptionActionOnKind.RUN_TIMER, payload: true })
   }
 
   return (

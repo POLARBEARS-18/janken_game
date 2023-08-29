@@ -5,9 +5,9 @@ import { HandOption, IOptions, IProps, IOptionsContext } from './optionsContextT
 import { initialState } from './initialContextValues'
 
 const options: IOptions[] = [
-  { name: HandOption.rock, icon: <FaRegHandRock size={60} /> },
-  { name: HandOption.paper, icon: <FaRegHandPaper size={60} /> },
-  { name: HandOption.scissors, icon: <FaRegHandScissors size={60} /> },
+  { name: HandOption.rock, icon: <FaRegHandRock size={60} data-testid="rock" /> },
+  { name: HandOption.paper, icon: <FaRegHandPaper size={60} data-testid="paper" /> },
+  { name: HandOption.scissors, icon: <FaRegHandScissors size={60} data-testid="scissors" /> },
 ]
 
 const OptionsContext = createContext<IOptionsContext>({

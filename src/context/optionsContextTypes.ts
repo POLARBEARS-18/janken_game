@@ -3,8 +3,8 @@ import { ActionTypes } from 'reducers/scoreReducerTypes'
 
 export const HandOption = {
   rock: 'グー',
-  paper: 'チョキ',
-  scissors: 'パー',
+  paper: 'パー',
+  scissors: 'チョキ',
 } as const
 
 export interface IOptions {

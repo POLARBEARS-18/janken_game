@@ -17,7 +17,7 @@ const HandleSelection: FC<Props> = ({ name, icon, handChoiceIndex }) => {
   const selectedHandIndex = state.playerHand
 
   const selectOption = (index: number) => {
-    dispatch({ type: OptionActionOnKind.update.UPDATE_PLAYER_CHOICE, payload: index })
+    dispatch({ type: OptionActionOnKind.UPDATE_PLAYER_CHOICE, payload: index })
     setHandPressed(true)
   }
 
