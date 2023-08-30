@@ -1,2 +1,6 @@
 # janken_game
-ReactとTypescriptとで構築されたじゃんけんゲーム
+
+React と Typescript とで構築されたじゃんけんゲーム
+udemy sample
+
+<https://janken-game-mu.vercel.app/>
