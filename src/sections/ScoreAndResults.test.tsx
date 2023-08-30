@@ -157,4 +157,115 @@ describe('ScoreAndResults', () => {
 
     expect(screen.getAllByTestId(/rock/i)).toHaveLength(3)
   })
+
+  it('should display the player and computer hand shake when playing', () => {
+    vi.useFakeTimers()
+
+    render(
+      <OptionsProvider>
+        <ScoreAndResults />
+        <ChooseAndPlay />
+      </OptionsProvider>
+    )
+
+    const playerHandShake = screen.queryByTestId('playerShake')
+    const computerHandShake = screen.queryByTestId('computerShake')
+
+    expect(playerHandShake).not.toBeInTheDocument()
+    expect(computerHandShake).not.toBeInTheDocument()
+
+    const hand = screen.getByText(/グー/i)
+
+    fireEvent.click(hand)
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(2000)
+    })
+
+    screen.debug()
+
+    expect(screen.queryByTestId('playerShake')).toBeInTheDocument()
+    expect(screen.queryByTestId('computerShake')).toBeInTheDocument()
+  })
+
+  it('should display the Player winner animation', () => {
+    vi.useFakeTimers()
+
+    render(
+      <OptionsProvider>
+        <ScoreAndResults />
+        <ChooseAndPlay />
+      </OptionsProvider>
+    )
+
+    const hand = screen.getByText(/パー/i)
+
+    fireEvent.click(hand)
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+
+    expect(screen.getByTestId('playerResult').getAttribute('class')).toContain('winnerAnimation')
+    expect(screen.getByTestId('computerResult').getAttribute('class')).not.toContain('winnerAnimation')
+
+    screen.debug()
+  })
+
+  it('should display the computer winner animation', () => {
+    vi.useFakeTimers()
+
+    render(
+      <OptionsProvider>
+        <ScoreAndResults />
+        <ChooseAndPlay />
+      </OptionsProvider>
+    )
+
+    const hand = screen.getByText(/チョキ/i)
+
+    fireEvent.click(hand)
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+
+    expect(screen.getByTestId('computerResult').getAttribute('class')).toContain('winnerAnimation')
+    expect(screen.getByTestId('playerResult').getAttribute('class')).not.toContain('winnerAnimation')
+  })
+
+  it('should reset the previous winner message results', () => {
+    vi.useFakeTimers()
+
+    render(
+      <OptionsProvider>
+        <ScoreAndResults />
+        <ChooseAndPlay />
+      </OptionsProvider>
+    )
+
+    const hand = screen.getByText(/チョキ/i)
+
+    fireEvent.click(hand)
+    fireEvent.click(screen.getByText('Play'))
+
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+
+    expect(screen.getByTestId('computerResult').getAttribute('class')).toContain('winnerAnimation')
+    expect(screen.getByText('Computer wins!')).toBeInTheDocument()
+    expect(screen.getAllByTestId(/rock/i)[0]).toBeVisible()
+    expect(screen.getAllByTestId(/rock/i)).toHaveLength(2)
+
+    fireEvent.click(screen.getByText(/パー/i))
+    // 勝者リセット後
+
+    expect(screen.getByTestId('computerResult').getAttribute('class')).not.toContain('winnerAnimation')
+    expect(screen.queryByText(/Computer wins!/i)).toBeNull()
+    expect(screen.getAllByTestId(/rock/i)).toHaveLength(1)
+  })
 })

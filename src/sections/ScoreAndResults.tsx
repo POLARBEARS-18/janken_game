@@ -57,8 +57,12 @@ const ScoreAndResults = () => {
         </div>
       </div>
       <div css={SResults}>
-        <div css={[SPlayerHand, winner === 'Player' && SWinnerAnimation]}>
-          {runTimer && <div css={SPlayerShake}>{options[0].icon}</div>}
+        <div css={[SPlayerHand, winner === 'Player' && SWinnerAnimation]} data-testid="playerResult">
+          {runTimer && (
+            <div css={SPlayerShake} data-testid="playerShake">
+              {options[0].icon}
+            </div>
+          )}
           {!runTimer && winner && (
             <>
               <div>{playerHandIcon}</div>
@@ -75,8 +79,12 @@ const ScoreAndResults = () => {
           {!runTimer && winner && <p css={SResultWinner}>{winner} wins!</p>}
           {!runTimer && winner && <p css={SResultMessage}>{message}</p>}
         </div>
-        <div css={[SComputerHand, winner === 'Computer' && SWinnerAnimation]}>
-          {runTimer && <div css={SComputerShake}>{options[0].icon}</div>}
+        <div css={[SComputerHand, winner === 'Computer' && SWinnerAnimation]} data-testid="computerResult">
+          {runTimer && (
+            <div css={SComputerShake} data-testid="computerShake">
+              {options[0].icon}
+            </div>
+          )}
           {!runTimer && winner && (
             <>
               <div>{computerHandIcon}</div>
@@ -183,7 +191,9 @@ const SComputerShake = css`
     }
   }
 `
-const SWinnerAnimation = css`
+export const SWinnerAnimation = css`
+  label: winnerAnimation;
+
   animation: winner 2s ease-in-out;
 
   @keyframes winner {
